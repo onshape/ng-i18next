@@ -1,6 +1,6 @@
 /*!
- * ng-i18next - Version 0.3.6 - 2014-11-22
- * Copyright (c) 2014 Andre Meyering
+ * ng-i18next - Version 0.3.6 - 2015-02-05
+ * Copyright (c) 2015 Andre Meyering
  *
  * AngularJS filter and directive for i18next (i18next by Jan Mühlemann)
  *
@@ -10,7 +10,7 @@
  * License: MIT - https://github.com/i18next/ng-i18next/LICENSE
  *
 */
-angular.module('jm.i18next', ['ng']);
+angular.module('jm.i18next', ['ng', 'ngSanitize']);
 angular.module('jm.i18next').provider('$i18next', function () {
 
 	'use strict';
@@ -148,7 +148,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 });
 
-angular.module('jm.i18next').directive('ngI18next', ['$i18next', '$compile', '$parse', '$interpolate', function ($i18next, $compile, $parse, $interpolate) {
+angular.module('jm.i18next').directive('ngI18next', ['$i18next', '$compile', '$parse', '$interpolate', '$sanitize', function ($i18next, $compile, $parse, $interpolate, $sanitize) {
 
 	'use strict';
 
@@ -218,6 +218,12 @@ angular.module('jm.i18next').directive('ngI18next', ['$i18next', '$compile', '$p
 			function render(i18nOptions) {
 				if (i18nOptions.sprintf) {
 					i18nOptions.postProcess = 'sprintf';
+				}
+
+				if (parsedKey.options.attr === 'html') {
+					angular.forEach(i18nOptions, function(value, key) {
+						i18nOptions[key] = $sanitize(value);
+					});
 				}
 
 				var string = $i18next(parsedKey.key, i18nOptions);
