@@ -120,7 +120,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 			translate(key, mergedOptions, hasOwnOptions);
 
 			// Fall back to the source string for not found ns strings
-			var translatedString = translations[mergedOptions.lng][key];
+			var translatedString = translations[mergedOptions.lng] ? translations[mergedOptions.lng][key] : key;
 			var nsseparator = mergedOptions.nsseparator;
 			var nsseparatorLength = nsseparator.length;
 			if (translatedString && translatedString.indexOf(nsseparator) > -1) {
