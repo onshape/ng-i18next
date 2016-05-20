@@ -124,7 +124,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 			var nsseparator = mergedOptions.nsseparator;
 			var nsseparatorLength = nsseparator.length;
 			var namedPlusSeparator = nsseparator;
-			var nameSpaces = mergedOptions.ns;
+			var nameSpaces = globalOptions.ns.namespaces;
 			for (var i = 0; i < nameSpaces.length; i++) {
 				namedPlusSeparator = nameSpaces[i] + nsseparator;
 				nsseparatorLength = namedPlusSeparator.length;
