@@ -107,8 +107,21 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			translate(key, mergedOptions, hasOwnOptions);
 
-			return !!mergedOptions.lng ? translations[mergedOptions.lng][key] : translations['auto'][key];
+			// Fall back to the source string for not found ns strings
+			var translatedString = translations[mergedOptions.lng] ? translations[mergedOptions.lng][key] : key;
+			var nsseparator = mergedOptions.nsseparator;
+			var nsseparatorLength = nsseparator.length;
+			var namedPlusSeparator = nsseparator;
+			var nameSpaces = globalOptions.ns.namespaces;
+			for (var i = 0; i < nameSpaces.length; i++) {
+				namedPlusSeparator = nameSpaces[i] + nsseparator;
+				nsseparatorLength = namedPlusSeparator.length;
+				if (translatedString && translatedString.indexOf(namedPlusSeparator) > -1) {
+					translatedString = translatedString.substr(translatedString.indexOf(namedPlusSeparator) + nsseparatorLength);
+				}
+			}
 
+			return !!mergedOptions.lng ? translatedString : translations['auto'][key];
 		}
 
 		$i18nextTanslate.debugMsg = [];

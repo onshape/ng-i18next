@@ -9,6 +9,12 @@ describe('Unit: jm.i18next - Provider', function () {
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
+		nsseparator: ':::',
+		ns: {
+			namespaces: ['translation'],
+			defaultNs: 'translation'
+		},
+		fallbackNS: 'translation',
 		resStore: {
 			'de-DE': {
 				translation: {
@@ -82,25 +88,6 @@ describe('Unit: jm.i18next - Provider', function () {
 		it('should translate "hello" into German ("de-DE"; default language)', function () {
 			inject(function () {
 				expect($i18next('hello')).toEqual('Herzlich Willkommen!');
-			});
-		});
-
-		it('should translate "hello" into German in default namespace ("de-DE"; default language)', function () {
-			inject(function () {
-				var originResStore = angular.copy(i18nextOptions.resStore);
-				i18nextOptions.resStore['de-DE'] = {
-					a: { 'hello': 'Herzlich Willkommen!' },
-					b: { 'helloName': 'Herzlich Willkommen, __name__!' }
-				};
-				i18nextOptions.ns = {
-					namespaces: ['a', 'b'],
-					defaultNs: 'a'
-				};
-
-				expect($i18next('hello')).toEqual('Herzlich Willkommen!');
-
-				delete i18nextOptions.ns;
-				i18nextOptions.resStore = originResStore;
 			});
 		});
 

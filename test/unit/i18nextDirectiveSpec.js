@@ -8,6 +8,12 @@ describe('Unit: jm.i18next - Directive', function () {
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
+		nsseparator: ':::',
+		ns: {
+			namespaces: ['translation'],
+			defaultNs: 'translation'
+		},
+		fallbackNS: 'translation',
 		resStore: {
 			'de-DE': {
 				translation: {
