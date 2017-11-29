@@ -2,7 +2,7 @@
   "name": "@onshape/ng-i18next",
   "version": "0.3.12",
   "description": "AngularJS filter and directive for i18next (i18next by Jan Mühlemann)",
-  "main": "./dist/ng-i18next.js",
+  "main": "index.js",
   "author": {
     "name": "Andre Meyering"
   },
@@ -39,7 +39,7 @@
   "scripts": {
     "test": "gulp test"
   },
-  "dependencies": {
-    "i18next": "1.7.10"
+  "peerDependencies": {
+    "i18next-client": "1.7.7"
   }
 }
