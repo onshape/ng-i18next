@@ -37,8 +37,6 @@
     "phantomjs": "2.1.7"
   },
   "scripts": {
-    "postinstall": "node ./node_modules/bower/bin/bower install",
-    "postupdate": "node ./node_modules/bower/bin/bower update",
     "test": "gulp test"
   }
 }
