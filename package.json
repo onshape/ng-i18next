@@ -40,6 +40,6 @@
     "test": "gulp test"
   },
   "peerDependencies": {
-    "i18next-client": "1.7.7"
+    "i18next": "~2.0.0"
   }
 }

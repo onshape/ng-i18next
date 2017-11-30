@@ -15,7 +15,13 @@ describe('Unit: jm.i18next - Provider', function () {
 			defaultNs: 'translation'
 		},
 		fallbackNS: 'translation',
-		resStore: {
+		interpolation: {
+			prefix: '__',
+			suffix: '__',
+			nestingPrefix: '$t(',
+			nestingSuffix: ')'
+		},
+		resources: {
 			'de-DE': {
 				translation: {
 					'hello': 'Herzlich Willkommen!',

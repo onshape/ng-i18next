@@ -14,7 +14,13 @@ describe('Unit: jm.i18next - Directive', function () {
 			defaultNs: 'translation'
 		},
 		fallbackNS: 'translation',
-		resStore: {
+		interpolation: {
+			prefix: '__',
+			suffix: '__',
+			nestingPrefix: '$t(',
+			nestingSuffix: ')'
+		},
+		resources: {
 			'de-DE': {
 				translation: {
 					'hello': 'Herzlich Willkommen!',

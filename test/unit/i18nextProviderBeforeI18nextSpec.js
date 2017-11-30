@@ -27,7 +27,7 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 	beforeEach(function () {
 
 		module('jm.i18next', function ($i18nextProvider) {
-            spyOn(jasmine.getGlobal().i18n, 'init');
+            spyOn(jasmine.getGlobal().i18next, 'init');
             $i18nextProvider.options = i18nextOptions;
 		});
 

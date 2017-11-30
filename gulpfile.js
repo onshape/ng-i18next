@@ -72,11 +72,11 @@ gulp.task('build', function() {
 
 	return gulp.src(['./src/provider.js', './src/{,*/}*.js'])
 
-		.pipe(concat(pkg.name + '.js'))
+		.pipe(concat('ng-i18next.js'))
 		.pipe(header(headerMeta, {pkg: pkg}))
 		.pipe(gulp.dest('./dist/'))
 
-		.pipe(rename(pkg.name + '.min.js'))
+		.pipe(rename('ng-i18next.min.js'))
 		.pipe(uglify())
 		.pipe(header(headerMetaMin, {pkg: pkg}))
 		.pipe(size())
@@ -90,7 +90,7 @@ gulp.task('karma', function() {
 	gulp.src([
 			'bower_components/angular/angular.js',
 			'bower_components/angular-mocks/angular-mocks.js',
-			'bower_components/i18next/i18next.js',
+			'bower_components/i18next/i18next.min.js',
 			'src/provider.js',
 			'src/{,*/}*.js',
 			'test/polyfills/*.js',

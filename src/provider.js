@@ -18,9 +18,9 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 		function init(options) {
 
-			if (window.i18n) {
+			if (window.i18next) {
 
-				window.i18n.init(options, function (localize) {
+				window.i18next.init(options, function (err, localize) {
 
 					translations = {};
 
@@ -30,7 +30,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 						$rootScope.$digest();
 					}
 
-					$rootScope.$broadcast('i18nextLanguageChange', window.i18n.lng());
+					$rootScope.$broadcast('i18nextLanguageChange', window.i18next.language);
 
 				});
 

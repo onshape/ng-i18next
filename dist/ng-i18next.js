@@ -1,6 +1,6 @@
 /*!
- * ng-i18next - Version 0.3.6 - 2014-11-22
- * Copyright (c) 2014 Andre Meyering
+ * @onshape/ng-i18next - Version 0.3.13 - 2017-11-30
+ * Copyright (c) 2017 Andre Meyering
  *
  * AngularJS filter and directive for i18next (i18next by Jan Mühlemann)
  *
@@ -30,9 +30,9 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 		function init(options) {
 
-			if (window.i18n) {
+			if (window.i18next) {
 
-				window.i18n.init(options, function (localize) {
+				window.i18next.init(options, function (err, localize) {
 
 					translations = {};
 
@@ -42,7 +42,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 						$rootScope.$digest();
 					}
 
-					$rootScope.$broadcast('i18nextLanguageChange', window.i18n.lng());
+					$rootScope.$broadcast('i18nextLanguageChange', window.i18next.language);
 
 				});
 
