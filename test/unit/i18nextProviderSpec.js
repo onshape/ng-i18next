@@ -9,7 +9,7 @@ describe('Unit: jm.i18next - Provider', function () {
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
-		nsseparator: ':::',
+		nsSeparator: ':::',
 		ns: {
 			namespaces: ['translation'],
 			defaultNs: 'translation'

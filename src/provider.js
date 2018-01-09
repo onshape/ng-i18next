@@ -109,7 +109,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			// Fall back to the source string for not found ns strings
 			var translatedString = translations[mergedOptions.lng] ? translations[mergedOptions.lng][key] : key;
-			var nsseparator = mergedOptions.nsseparator;
+			var nsseparator = mergedOptions.nsSeparator;
 			var nsseparatorLength = nsseparator.length;
 			var namedPlusSeparator = nsseparator;
 			var nameSpaces = globalOptions.ns.namespaces;

@@ -8,7 +8,7 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
-		nsseparator: ':::',
+		nsSeparator: ':::',
 		ns: {
 			namespaces: ['translation'],
 			defaultNs: 'translation'

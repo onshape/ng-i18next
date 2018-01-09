@@ -1,6 +1,6 @@
 /*!
- * @onshape/ng-i18next - Version 0.3.13 - 2017-11-30
- * Copyright (c) 2017 Andre Meyering
+ * @onshape/ng-i18next - Version 0.3.14 - 2018-01-09
+ * Copyright (c) 2018 Andre Meyering
  *
  * AngularJS filter and directive for i18next (i18next by Jan Mühlemann)
  *
@@ -121,7 +121,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			// Fall back to the source string for not found ns strings
 			var translatedString = translations[mergedOptions.lng] ? translations[mergedOptions.lng][key] : key;
-			var nsseparator = mergedOptions.nsseparator;
+			var nsseparator = mergedOptions.nsSeparator;
 			var nsseparatorLength = nsseparator.length;
 			var namedPlusSeparator = nsseparator;
 			var nameSpaces = globalOptions.ns.namespaces;
