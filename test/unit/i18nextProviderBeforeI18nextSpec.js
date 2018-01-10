@@ -1,4 +1,6 @@
-describe('Unit: jm.i18next - Provider behavior before i18next has been initialized', function () {
+// Disabled because since i18next must be initialized before use there's no way for the provider to be used without i18next having
+// been loaded etc.
+xdescribe('Unit: jm.i18next - Provider behavior before i18next has been initialized', function () {
 
 	'use strict';
 
@@ -9,10 +11,8 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 		useLocalStorage: false,
 		fallbackLng: 'dev',
 		nsSeparator: ':::',
-		ns: {
-			namespaces: ['translation'],
-			defaultNs: 'translation'
-		},
+		ns: ['translation'],
+		defaultNs: 'translation',
 		fallbackNS: 'translation',
 		resStore: {
 			'de-DE': {
@@ -42,6 +42,7 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 		beforeEach(function () {
 			i18nextOptions.defaultLoadingValue = 'A default value!';
 			$i18next.options = i18nextOptions;
+			window.i18next.init(i18nextOptions);
 		});
 
 		it('should return original key, because translation does not exist', function () {

@@ -4,51 +4,27 @@ angular.module('jm.i18next').provider('$i18next', function () {
 	'use strict';
 
 	var self = this,
-		/**
-		 * This will be our translation function (see code below)
-		 */
-		t = null,
 		translations = {},
-		globalOptions = null,
-		triesToLoadI18next = 0;
+		globalOptions = null;
 
 	self.options = {};
+	self.i18n = {};
+	self.$get = ['$rootScope', function ($rootScope) {
 
-	self.$get = ['$rootScope', '$timeout', function ($rootScope, $timeout) {
-
-		function init(options) {
+		function init() {
 
 			if (window.i18next) {
-
-				window.i18next.init(options, function (err, localize) {
-
-					translations = {};
-
-					t = localize;
-
-					if (!$rootScope.$$phase) {
-						$rootScope.$digest();
-					}
-
-					$rootScope.$broadcast('i18nextLanguageChange', window.i18next.language);
-
-				});
-
+				// assign instance of i18next
+				self.i18n = window.i18next;
+				self.options = window.i18next.options;
 			} else {
-
-				triesToLoadI18next++;
-				// only check 4 times for i18next
-				if (triesToLoadI18next < 5) {
-
-					$timeout(function () {
-						init(options);
-					}, 400);
-
-				} else {
-					throw new Error('[ng-i18next] Can\'t find i18next!');
-				}
-
+					throw new Error('[ng-i18next] Can\'t find i18next and/or i18next options! Please refer to i18next.');
 			}
+
+			window.i18next.on('initialized', function (options) {
+					self.options = options;
+					$rootScope.$broadcast('i18nextLanguageChange', self.options.lng);
+			});
 		}
 
 		function optionsChange(newOptions, oldOptions) {
@@ -57,7 +33,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			globalOptions = newOptions;
 
-			init(globalOptions);
+			init();
 
 		}
 
@@ -74,7 +50,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 				translations[lng] = {};
 			}
 
-			if (!t) {
+			if (!self.i18n) {
 
 				translations[lng][key] = 'defaultLoadingValue' in options ? options.defaultLoadingValue :
 					'defaultValue' in options ? options.defaultValue :
@@ -82,7 +58,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			} else if (!translations[lng][key] || hasOwnOptions) {
 
-				translations[lng][key] = t(key, options);
+				translations[lng][key] = self.i18n.t(key, options);
 
 			}
 
@@ -92,15 +68,15 @@ angular.module('jm.i18next').provider('$i18next', function () {
 
 			var hasOwnOptions = !!options,
 			    hasOwnNsOption = hasOwnOptions && options.ns,
-			    hasGlobalNsObj = globalOptions && globalOptions.ns,
-			    defaultOptions = globalOptions,
+			    hasGlobalNsObj = self.options && self.options.ns,
+			    defaultOptions = self.options,
 			    mergedOptions;
 
 			// https://github.com/i18next/i18next/blob/e47bdb4d5528c752499b0209d829fde4e1cc96e7/src/i18next.translate.js#L232
 			// Because of i18next read namespace from `options.ns`
 			if (!hasOwnNsOption && hasGlobalNsObj) {
-				defaultOptions = angular.copy(globalOptions);
-				defaultOptions.ns = defaultOptions.ns.defaultNs;
+				defaultOptions = angular.copy(self.options);
+				defaultOptions.ns = defaultOptions.defaultNs;
 			}
 
 			mergedOptions = hasOwnOptions ? angular.extend({}, defaultOptions, options) : defaultOptions;
@@ -112,7 +88,7 @@ angular.module('jm.i18next').provider('$i18next', function () {
 			var nsseparator = mergedOptions.nsSeparator;
 			var nsseparatorLength = nsseparator.length;
 			var namedPlusSeparator = nsseparator;
-			var nameSpaces = globalOptions.ns.namespaces;
+			var nameSpaces = self.options.ns;
 			for (var i = 0; i < nameSpaces.length; i++) {
 				namedPlusSeparator = nameSpaces[i] + nsseparator;
 				nsseparatorLength = namedPlusSeparator.length;

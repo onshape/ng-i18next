@@ -8,10 +8,8 @@ describe('Unit: jm.i18next - Filter', function () {
 		useLocalStorage: false,
 		fallbackLng: 'dev',
 		nsSeparator: ':::',
-		ns: {
-			namespaces: ['translation'],
-			defaultNs: 'translation'
-		},
+		ns: ['translation'],
+		defaultNs: 'translation',
 		fallbackNS: 'translation',
 		interpolation: {
 			prefix: '__',
@@ -51,6 +49,9 @@ describe('Unit: jm.i18next - Filter', function () {
 	};
 
 	beforeEach(function () {
+
+		window.i18next.init(i18nextOptions);
+
 		module('jm.i18next', function ($i18nextProvider) {
 			$i18nextProvider.options = i18nextOptions;
 		});
