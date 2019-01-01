@@ -1,6 +1,6 @@
 {
   "name": "@onshape/ng-i18next",
-  "version": "0.3.16",
+  "version": "0.3.17-1",
   "description": "AngularJS filter and directive for i18next (i18next by Jan Mühlemann)",
   "main": "index.js",
   "author": {
