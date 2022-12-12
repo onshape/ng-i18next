@@ -8,6 +8,10 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
+		nsSeparator: ':::',
+		ns: ['translation'],
+		defaultNs: 'translation',
+		fallbackNS: 'translation',
 		debug: false,
 		resources: {
 			'de-DE': {
@@ -46,9 +50,10 @@ describe('Unit: jm.i18next - Provider behavior before i18next has been initializ
 	});
 
 	describe('global defaultValue', function () {
-
+		window.i18next.init(i18nextOptions);
 		beforeEach(function () {
 			tOptions.defaultValue = 'A default value!';
+			window.i18next.init(i18nextOptions);
 		});
 
 		it('should return original key, because translation does not exist', function () {

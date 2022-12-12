@@ -8,6 +8,16 @@ describe('Unit: jm.i18next - Provider', function () {
 		useCookie: false,
 		useLocalStorage: false,
 		fallbackLng: 'dev',
+		nsSeparator: ':::',
+		ns: ['translation'],
+		defaultNs: 'translation',
+		fallbackNS: 'translation',
+		interpolation: {
+			prefix: '__',
+			suffix: '__',
+			nestingPrefix: '$t(',
+			nestingSuffix: ')'
+		},
 		resources: {
 			'de-DE': {
 				translation: {
@@ -39,7 +49,7 @@ describe('Unit: jm.i18next - Provider', function () {
 	};
 
 	beforeEach(function () {
-
+		window.i18next.init(i18nextOptions);
 		module('jm.i18next', function ($i18nextProvider) {
 			jasmine.getGlobal().i18next.init(i18nextOptions, function (err, t) {
 				// console.log('resources loaded');

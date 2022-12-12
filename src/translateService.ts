@@ -42,7 +42,22 @@ export class I18nTranslateService implements Ii18nTranslateService {
 
 		this.translate(key, mergedOptions, hasOwnOptions);
 
-		return angular.isDefined(lng) ? this.translations[lng][key] : this.translations.auto[key];
+		// return angular.isDefined(lng) ? this.translations[lng][key] : this.translations.auto[key];
+		// Fall back to the source string for not found ns strings
+		let translatedString = this.translations[mergedOptions.lng] ? this.translations[mergedOptions.lng][key] : key;
+		const nsseparator = mergedOptions.nsSeparator;
+		let nsseparatorLength = nsseparator?.length;
+		let namedPlusSeparator = nsseparator;
+		const nameSpaces = this.options.ns;
+		for (let i = 0; i < nameSpaces?.length; i++) {
+			namedPlusSeparator = nameSpaces[i] + nsseparator;
+			nsseparatorLength = namedPlusSeparator.length;
+			if (translatedString && translatedString.indexOf(namedPlusSeparator) > -1) {
+				translatedString = translatedString.substr(translatedString.indexOf(namedPlusSeparator) + nsseparatorLength);
+			}
+		}
+
+		return angular.isDefined(lng) ? translatedString : this.translations.auto[key];
 	}
 
 	public changeLanguage(lng: string) {

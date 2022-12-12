@@ -82,7 +82,7 @@ function concatLib() {
 	return src('./build/ng-i18next.js')
 		.pipe(header(headerMeta, { pkg: pkg }))
 		.pipe(dest('./dist/'))
-		.pipe(rename(pkg.name + '.min.js'))
+		.pipe(rename('ng-i18next.min.js'))
 		.pipe(uglify({ mangle: false }))
 		.pipe(header(headerMetaMin, { pkg: pkg }))
 		.pipe(size())
