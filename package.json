@@ -1,8 +1,8 @@
 {
   "name": "@onshape/ng-i18next-2",
-  "version": "1.0.7",
+  "version": "1.0.7-1",
   "description": "AngularJS provider, filter and directive for i18next (i18next by Jan Mühlemann)",
-  "main": "./dist/ng-i18next.js",
+  "main": "index.js",
   "author": {
     "name": "i18next authors"
   },

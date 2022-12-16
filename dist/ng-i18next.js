@@ -1,6 +1,6 @@
 /*!
- * ng-i18next - Version 1.0.7 - 2019-11-26
- * Copyright (c) 2019 i18next authors
+ * @onshape/ng-i18next-2 - Version 1.0.7-1 - 2022-12-12
+ * Copyright (c) 2022 i18next authors
  *
  * AngularJS provider, filter and directive for i18next (i18next by Jan Mühlemann)
  *
@@ -247,6 +247,7 @@ var I18nTranslateService = /** @class */ (function () {
         this.initializeI18next();
     }
     I18nTranslateService.prototype.t = function (key, ownOptions) {
+        var _a, _b;
         var hasOwnOptions = angular.isDefined(ownOptions);
         var hasOwnNsOption = hasOwnOptions && angular.isDefined(ownOptions.ns);
         var hasInitNsObj = angular.isDefined(this.options) && angular.isDefined(this.options.ns);
@@ -264,7 +265,21 @@ var I18nTranslateService = /** @class */ (function () {
         // lng will be deleted in some case
         lng = mergedOptions.lng;
         this.translate(key, mergedOptions, hasOwnOptions);
-        return angular.isDefined(lng) ? this.translations[lng][key] : this.translations.auto[key];
+        // return angular.isDefined(lng) ? this.translations[lng][key] : this.translations.auto[key];
+        // Fall back to the source string for not found ns strings
+        var translatedString = this.translations[mergedOptions.lng] ? this.translations[mergedOptions.lng][key] : key;
+        var nsseparator = mergedOptions.nsSeparator;
+        var nsseparatorLength = (_a = nsseparator) === null || _a === void 0 ? void 0 : _a.length;
+        var namedPlusSeparator = nsseparator;
+        var nameSpaces = this.options.ns;
+        for (var i = 0; i < ((_b = nameSpaces) === null || _b === void 0 ? void 0 : _b.length); i++) {
+            namedPlusSeparator = nameSpaces[i] + nsseparator;
+            nsseparatorLength = namedPlusSeparator.length;
+            if (translatedString && translatedString.indexOf(namedPlusSeparator) > -1) {
+                translatedString = translatedString.substr(translatedString.indexOf(namedPlusSeparator) + nsseparatorLength);
+            }
+        }
+        return angular.isDefined(lng) ? translatedString : this.translations.auto[key];
     };
     I18nTranslateService.prototype.changeLanguage = function (lng) {
         var _this = this;
