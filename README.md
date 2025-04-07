@@ -1,12 +1,11 @@
-<div style="width: 100%; background-color: #ff8800; color: black; padding: 10px">
-	<b>Warning</b>
+# Warning
 
-	We are no longer using master branch.
+We are no longer using master branch.
 
-	Current `main` branch is published as `@onshape/ng-i18next-2` for consuming in disk images and newton.
+Current `main` branch is published as `@onshape/ng-i18next-2` for consuming in disk images and newton.
 
-	If you need to make changes in this package for i18next, please fork new branch from `main`. After your changes, please send a PR to main. Please note, `main` branch is publised as `@onshape/ng-i18next-2` for consuming in disk images.
-</div>
+If you need to make changes in this package for i18next, please fork new branch from `main`. After your changes, please send a PR to main. Please note, `main` branch is publised as `@onshape/ng-i18next-2` for consuming in disk images.
+
 
 # ng-i18next - use i18next with Angularjs [![Build Status](https://travis-ci.org/i18next/ng-i18next.svg?branch=master)](https://travis-ci.org/i18next/ng-i18next) #
 
