@@ -1,3 +1,12 @@
+# Warning
+
+We are no longer using master branch.
+
+Current `main` branch is published as `@onshape/ng-i18next-2` for consuming in disk images and newton.
+
+If you need to make changes in this package for i18next, please fork new branch from `main`. After your changes, please send a PR to main. Please note, `main` branch is publised as `@onshape/ng-i18next-2` for consuming in disk images.
+
+
 # ng-i18next - use i18next with Angularjs [![Build Status](https://travis-ci.org/i18next/ng-i18next.svg?branch=master)](https://travis-ci.org/i18next/ng-i18next) #
 
 Project goal is to provide an easy way to use [i18next](http://i18next.com/) with [AngularJS](http://angularjs.org/):
